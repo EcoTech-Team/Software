@@ -57,8 +57,8 @@
 #define MTR_HIN_PIN		GPIO_PIN_8
 #define MTR_LIN_GPIO	GPIOB
 #define MTR_LIN_PIN		GPIO_PIN_13
-#define MTR_IIN_GPIO	GPIOA
-#define MTR_IIN_PIN		GPIO_PIN_2
+#define MTR_IIN_GPIO	GPIOB
+#define MTR_IIN_PIN		GPIO_PIN_0
 #define MTR_TIM			TIM1
 #define MTR_ADC			ADC1
 #define MTR_ADC_TIM		TIM3
