@@ -24,6 +24,8 @@ bool _MotorState = false;
 uint8_t _ControllerState=0;
 uint8_t _MessageTimer = 0;
 
+uint8_t messageBuffer[7];
+
 
 const uint16_t _CurrentTable[120] = {2045, 2105, 2164, 2224, 2283, 2343, 2402, 2462, 2522, 2581, 2590, 2586, 2582, 2579, 2575, 2571, 2567, 2564, 2560, 2556, 2553, 2549, 2545, 2541, 2538, 2518, 2497, 2477, 2457, 2437, 2417, 2397, 2377, 2357, 2337, 2317, 2296, 2276, 2256, 2236, 2216, 2196, 2176, 2156, 2136, 2116, 2095, 2075, 2055, 2035, 2009, 2008, 2007, 2007, 2006, 2006, 2005, 2005, 2004, 2004, 2003, 2003, 2002, 2002, 2001, 2001, 2000, 2000, 1999, 1999, 1998, 1998, 1997, 1997, 1996, 1995, 1995, 1994, 1994, 1993, 1993, 1992, 1992, 1991, 1991, 1990, 1990, 1989, 1989, 1988, 1988, 1987, 1987, 1986, 1986, 1985, 1985, 1984, 1983, 1983, 1982, 1982, 1981, 1981, 1980, 1980, 1979, 1979, 1978, 1978, 1977, 1977, 1976, 1976, 1975, 1975, 1974, 1974, 1973, 1973};
 
@@ -100,6 +102,7 @@ int main(void)
 //! Systick handler called in interrupt
 void SYS_Tick(void)
 {
+	
 	//! Read rpm value from encoder
 	_Rpm = ENC_ReadAndReset();
 	//! Calculate rpm to table index value
@@ -110,20 +113,18 @@ void SYS_Tick(void)
 	{
 		MTR_SetLimit(_CurrentTable1[_TableIndex]);
 	}
-
-
 	else MTR_SetLimit(_CurrentTable[_TableIndex]);
 
 	//! TODO: Handle events
 	if(_MessageTimer > 10)
 	{
-
 		_ControllerState=0;
-
-
-
 	}
 	else _MessageTimer++;
+
+	// send telemetry packet every 10ms.
+	uint8_t len = MSG_PackDriverState(4 /*volt*/, 2 /*amp*/, 0 /*rpm*/, messageBuffer);
+	BUS_Send(messageBuffer, len);
 }
 
 

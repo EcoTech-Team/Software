@@ -5,6 +5,7 @@
 
 #include "system_driver.h"
 #include "stm32f10x.h"
+#include "hardware.h"
 
 
 uint32_t _Tick;
@@ -43,6 +44,9 @@ void SYS_Init(void)
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPBEN | RCC_APB2ENR_ADC1EN |
 					RCC_APB2ENR_TIM1EN | RCC_APB2ENR_AFIOEN;
 	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN | RCC_APB1ENR_TIM4EN | RCC_APB1ENR_USART3EN;
+	#ifdef BUS_TIM_USED
+	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+	#endif
 	RCC->AHBENR |= RCC_AHBENR_DMA1EN;
 
 
