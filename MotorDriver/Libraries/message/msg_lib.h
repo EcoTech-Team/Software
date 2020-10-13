@@ -18,6 +18,7 @@ typedef enum
 {
     MSG_NOT_VALID,
     MSG_BTN_STATE,
+    MSG_DRV_STATE
 } MSG_Command;
 
 
@@ -25,7 +26,7 @@ typedef enum
 typedef struct
 {
     uint8_t Address;
-    MSG_Command Command;
+    uint8_t Command;
     uint8_t Length;
     uint8_t Payload[];
 } MSG_Message;
@@ -35,6 +36,9 @@ void MSG_CrcInit(void);
 uint8_t MSG_CalculateCrc(uint8_t *data, uint8_t len);
 bool MSG_ValidateCrc(uint8_t *data, uint8_t len);
 void __attribute__((weak)) MSG_Received(uint8_t *buff, uint8_t len);
+
+uint8_t MSG_Pack(MSG_Command cmd, uint8_t *data, uint8_t len, uint8_t *buff);
+uint8_t MSG_PackDriverState(uint8_t volt, uint8_t amp, uint8_t rpm, uint8_t *buff);
 
 
 #endif /* MSG_LIB_H_ */

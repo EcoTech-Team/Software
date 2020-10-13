@@ -40,6 +40,8 @@
 #define BUS_TX_PIN	GPIO_PIN_10
 #define BUS_RX_PIN	GPIO_PIN_11
 #define BUS_UART	USART3
+#define BUS_TIM     TIM2
+//#define BUS_TIM_USED  // define to use TIMER
 
 //! ########################### ENCODER ########################### 
 #define ENC_GPIO	GPIOB
