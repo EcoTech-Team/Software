@@ -39,7 +39,7 @@ void BUS_Init(void)
 	UCSRB = (1<<TXEN) | (1<<TXCIE);
 	/* Set frame format: 8data, 1stop bit , parity disabled*/
 	UCSRC |= (1<<URSEL) | (1<<UCSZ0) | (1<<UCSZ1);
-	UCSRC &= !((1<<UPM0) | (1<<UPM1));
+	UCSRC &= ~((1<<UPM0) | (1<<UPM1));
 
 	// TIM0 peripheral initialization
 	//todo prescaler TIM0 wypadało by dobrac do szybkosci zegara i ubrr. z 8 uwalało bajty przy 1mhz i 4800, ale na 8mhz moze byc ok.
@@ -115,7 +115,7 @@ ISR(TIMER0_OVF_vect)
 	bool temp_RxOverflow = _RxOverflow;
 
 	//! Stop timer
-	BUS_TCCR &= !((1<<CS01) | (1<<CS00));
+	BUS_TCCR &= ~((1<<CS01) | (1<<CS00));
 	//! Set next rx buffer and reset data index to 0
 	_RxMsg = (_RxMsg + 1) % BUS_BUFF_NUM;
 	_RxData = 0;

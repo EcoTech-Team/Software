@@ -21,7 +21,7 @@ void LED_RedOn(void)
 
 void LED_RedOff(void)
 {
-	LED_PORT &= !(1<<LED_R);
+	LED_PORT &= ~(1<<LED_R);
 }
 
 
@@ -46,7 +46,7 @@ void LED_GreenOn(void)
 
 void LED_GreenOff(void)
 {
-	LED_PORT &= !(1<<LED_G);
+	LED_PORT &= ~(1<<LED_G);
 }
 
 
@@ -59,7 +59,7 @@ void LED_GreenToggle(void)
 void LED_GreenSet(LED_State state)
 {
 	if(state) LED_PORT |= (1<<LED_G);
-	else LED_PORT &= !(1<<LED_G);
+	else LED_PORT &= ~(1<<LED_G);
 }
 
 

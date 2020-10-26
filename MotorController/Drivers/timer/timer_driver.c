@@ -13,7 +13,7 @@
 void TIM_Init(void)
 {
 	TCCR1B |= (1<<WGM12); //CTC Mode
-	OCR1A = 625;   //przy 1250 100na sek czyli 10ms od wiadomosci     //625 200na sek czyli 5ms         // todo ##################### to na pewno trzeba dobrać #####################
+	OCR1A = 1000;   // 125 = 1ms,  1000 = 8ms
 	TIMSK |= (1<<OCIE1A); //setting interr after achieving value in OCR2
 	TIM_Start();
 }
@@ -41,7 +41,7 @@ void TIM_Start(void)
 
 void TIM_Stop(void)
 {
-	TCCR1B &= !((1<<CS10) | (1<<CS11));
+	TCCR1B &= ~((1<<CS10) | (1<<CS11));
 }
 
 

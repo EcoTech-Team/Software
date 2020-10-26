@@ -9,16 +9,16 @@
 void BTN_Init(void)
 {
 	// Set GPIO in input configuration
-	BTN_DDR_A &= !(1<<BTN_P_A);
+	BTN_DDR_A &= ~(1<<BTN_P_A);
 	BTN_PORT_A |= (1<<BTN_P_A);
 
-	BTN_DDR_B &= !(1<<BTN_P_B);
+	BTN_DDR_B &= ~(1<<BTN_P_B);
 	BTN_PORT_B |= (1<<BTN_P_B);
 
-	BTN_DDR_C &= !(1<<BTN_P_C); //input
+	BTN_DDR_C &= ~(1<<BTN_P_C); //input
 	BTN_PORT_C |= (1<<BTN_P_C); //pull up
 
-	BTN_DDR_D &= !(1<<BTN_P_D);
+	BTN_DDR_D &= ~(1<<BTN_P_D);
 	BTN_PORT_D |= (1<<BTN_P_D);
 }
 
